@@ -12,7 +12,7 @@ class DynamoDbFeatureRequester extends FeatureRequesterBase
     /** @var DynamoDbClient */
     protected $_client;
 
-    public function __construct($baseUri, $sdkKey, $options)
+    public function __construct(string $baseUri, string $sdkKey, array $options)
     {
         parent::__construct($baseUri, $sdkKey, $options);
 
@@ -21,11 +21,11 @@ class DynamoDbFeatureRequester extends FeatureRequesterBase
         }
         $this->_tableName = $options['dynamodb_table'];
 
-        $dynamoDbOptions = isset($options['dynamodb_options']) ? $options['dynamodb_options'] : array();
+        $dynamoDbOptions = $options['dynamodb_options'] ?? [];
         $dynamoDbOptions['version'] = '2012-08-10'; // in the AWS SDK for PHP, this is how you specify the API version
         $this->_client = new DynamoDbClient($dynamoDbOptions);
 
-        $prefix = isset($options['dynamodb_prefix']) ? $options['dynamodb_prefix'] : '';
+        $prefix = $options['dynamodb_prefix'] ?? '';
         $this->_prefix = ($prefix != null && $prefix != '') ? ($prefix . ':') : '';
     }
 
@@ -48,7 +48,7 @@ class DynamoDbFeatureRequester extends FeatureRequesterBase
             return null;
         }
         $attr = $item['item'];
-        return isset($attr['S']) ? $attr['S'] : null;
+        return $attr['S'] ?? null;
     }
 
     protected function readItemStringList(string $namespace): ?array

@@ -8,8 +8,7 @@ class DynamoDb
     /**
      * Configures an adapter for reading feature flag data from DynamoDB.
      *
-     * To use this method, you must have installed the package `aws/aws-sdk-php`. After calling this
-     * method, store its return value in the `feature_requester` property of your client configuration:
+     * After calling this method, store its return value in the `feature_requester` property of your client configuration:
      *
      *     $fr = LaunchDarkly\Integrations\DynamoDb::featureRequester([ "dynamodb_table" => "my-table" ]);
      *     $config = [ "feature_requester" => $fr ];
@@ -26,7 +25,7 @@ class DynamoDb
      *   - `apc_expiration`: expiration time in seconds for local caching, if `APCu` is installed
      * @return mixed  an object to be stored in the `feature_requester` configuration property
      */
-    public static function featureRequester($options = array())
+    public static function featureRequester(array $options = array())
     {
         return function ($baseUri, $sdkKey, $baseOptions) use ($options) {
             return new DynamoDbFeatureRequester($baseUri, $sdkKey, array_merge($baseOptions, $options));
