@@ -23,7 +23,7 @@ Then, in your project that uses the shared tests, add this to `composer.json`:
 And add this dependency:
 
 ```json
-    "launchdarkly/server-sdk-shared-tests": "dev-main"
+    "launchdarkly/server-sdk-shared-tests": "@dev"
 ```
 
 To update the copy of `php-server-sdk-shared-tests` in your repository to reflect changes in this one:
