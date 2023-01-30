@@ -3,7 +3,6 @@
 namespace LaunchDarkly\Impl\Integrations\Tests;
 
 use Aws\DynamoDb\DynamoDbClient;
-use LaunchDarkly\FeatureRequester;
 use LaunchDarkly\Integrations\DynamoDb;
 use LaunchDarkly\SharedTest\DatabaseFeatureRequesterTestBase;
 use Psr\Log\NullLogger;
@@ -38,7 +37,7 @@ class DynamoDbFeatureRequesterTest extends DatabaseFeatureRequesterTestBase
         );
     }
 
-    protected function makeRequester($prefix): FeatureRequester
+    protected function makeRequester($prefix)
     {
         $options = array(
             'dynamodb_table' => self::TABLE_NAME,
