@@ -1,6 +1,6 @@
 # LaunchDarkly Server-Side SDK for PHP - DynamoDB integration
 
-[![CircleCI](https://circleci.com/gh/launchdarkly/php-server-sdk-dynamodb.svg?style=svg)](https://circleci.com/gh/launchdarkly/php-server-sdk-dynamodb)
+[![Run CI](https://github.com/launchdarkly/php-server-sdk-dynamodb/actions/workflows/ci.yml/badge.svg)](https://github.com/launchdarkly/php-server-sdk-dynamodb/actions/workflows/ci.yml)
 [![Packagist](https://img.shields.io/packagist/v/launchdarkly/server-sdk-dynamodb.svg?style=flat-square)](https://packagist.org/packages/launchdarkly/server-sdk-dynamodb)
 [![Documentation](https://img.shields.io/static/v1?label=GitHub+Pages&message=API+reference&color=00add8)](https://launchdarkly.github.io/php-server-sdk-dynamodb)
 
