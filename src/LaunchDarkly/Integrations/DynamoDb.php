@@ -2,6 +2,7 @@
 namespace LaunchDarkly\Integrations;
 
 use \LaunchDarkly\Impl\Integrations\DynamoDbFeatureRequester;
+use Psr\Container\ContainerInterface;
 
 class DynamoDb
 {
@@ -23,12 +24,17 @@ class DynamoDb
      *   - `dynamodb_prefix`: a string to be prepended to all database keys; corresponds to the prefix
      * setting in ld-relay
      *   - `apc_expiration`: expiration time in seconds for local caching, if `APCu` is installed
-     * @return mixed  an object to be stored in the `feature_requester` configuration property
+     * @return \Closure  an object to be stored in the `feature_requester` configuration property
      */
-    public static function featureRequester(array $options = array())
+    public static function featureRequester(array $options = [], ContainerInterface $container = null)
     {
-        return function ($baseUri, $sdkKey, $baseOptions) use ($options) {
-            return new DynamoDbFeatureRequester($baseUri, $sdkKey, array_merge($baseOptions, $options));
+        return static function ($baseUri, $sdkKey, $baseOptions) use ($options, $container) {
+            return new DynamoDbFeatureRequester(
+                $baseUri,
+                $sdkKey,
+                array_merge($baseOptions, $options),
+                $container
+            );
         };
     }
 }

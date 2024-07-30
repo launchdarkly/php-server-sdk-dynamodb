@@ -2,6 +2,9 @@
 namespace LaunchDarkly\Impl\Integrations;
 
 use Aws\DynamoDb\DynamoDbClient;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 /**
  * @internal
@@ -15,7 +18,13 @@ class DynamoDbFeatureRequester extends FeatureRequesterBase
     /** @var DynamoDbClient */
     protected $_client;
 
-    public function __construct(string $baseUri, string $sdkKey, array $options)
+    /**
+     * @param ?ContainerInterface $container If provided, this will be used to resolve the DynamoDbClient service,
+     * and `$options['dynamodb_options']` will be ignored.
+     * @throws NotFoundExceptionInterface|ContainerExceptionInterface When DynamoDbClient hasn't been registered in the
+     * container or the provided definition is invalid.
+     */
+    public function __construct(string $baseUri, string $sdkKey, array $options, ?ContainerInterface $container = null)
     {
         parent::__construct($baseUri, $sdkKey, $options);
 
@@ -26,7 +35,7 @@ class DynamoDbFeatureRequester extends FeatureRequesterBase
 
         $dynamoDbOptions = $options['dynamodb_options'] ?? [];
         $dynamoDbOptions['version'] = '2012-08-10'; // in the AWS SDK for PHP, this is how you specify the API version
-        $this->_client = new DynamoDbClient($dynamoDbOptions);
+        $this->_client = $container ? $container->get('DynamoDbClient') : new DynamoDbClient($dynamoDbOptions);
 
         $prefix = $options['dynamodb_prefix'] ?? '';
         $this->_prefix = ($prefix != null && $prefix != '') ? ($prefix . ':') : '';
