@@ -26,7 +26,7 @@ class DynamoDbFeatureRequester extends FeatureRequesterBase
 
         $dynamoDbOptions = $options['dynamodb_options'] ?? [];
         $dynamoDbOptions['version'] = '2012-08-10'; // in the AWS SDK for PHP, this is how you specify the API version
-        $this->_client = new DynamoDbClient($dynamoDbOptions);
+        $this->_client = $options['dynamodb_client'] ?? new DynamoDbClient($dynamoDbOptions);
 
         $prefix = $options['dynamodb_prefix'] ?? '';
         $this->_prefix = ($prefix != null && $prefix != '') ? ($prefix . ':') : '';
