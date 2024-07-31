@@ -36,7 +36,7 @@ class DynamoDb
      */
     public static function featureRequester(array $options = [])
     {
-        return static function ($baseUri, $sdkKey, $baseOptions) use ($options) {
+        return function ($baseUri, $sdkKey, $baseOptions) use ($options) {
             return new DynamoDbFeatureRequester($baseUri, $sdkKey, array_merge($baseOptions, $options));
         };
     }
