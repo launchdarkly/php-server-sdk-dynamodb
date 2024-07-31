@@ -51,8 +51,13 @@ class DynamoDbFeatureRequesterTest extends DatabaseFeatureRequesterTestBase
 
     protected function putSerializedItem($prefix, $namespace, $key, $version, $json): void
     {
+        $this->putSerializedItemWithClient(self::$dynamoDbClient, $prefix, $namespace, $key, $version, $json);
+    }
+
+    protected function putSerializedItemWithClient($client, $prefix, $namespace, $key, $version, $json): void
+    {
         $prefixedNamespace = self::realPrefix($prefix) . $namespace;
-        self::$dynamoDbClient->putItem(array(
+        $client->putItem(array(
             'TableName' => self::TABLE_NAME,
             'Item' => array(
                 'namespace' => array('S' => $prefixedNamespace),
@@ -136,5 +141,19 @@ class DynamoDbFeatureRequesterTest extends DatabaseFeatureRequesterTestBase
             }
             sleep(1);
         }
+    }
+
+    public function testCanProvideFullyConfiguredClient()
+    {
+        $flagJson = '{"key": "flag-key", "version": 1, "on": true, "prerequisites": [], "salt": "key", "targets": [], "rules": [], "fallthrough": { "variation": 0 }, "offVariation": 0, "variations": [true, false], "deleted": false}';
+
+        $client = new DynamoDbClient(self::makeDynamoDbOptions());
+        $this->putSerializedItemWithClient($client, 'my-prefix', 'features', 'flag-key', 1, $flagJson);
+
+        $requesterFn = DynamoDb::featureRequester(['dynamodb_client' => $client, 'dynamodb_table' => self::TABLE_NAME, 'dynamodb_prefix' => 'my-prefix']);
+        $requester = $requesterFn('', '', []);
+        $flag = $requester->getFeature("flag-key");
+
+        $this->assertEquals('flag-key', $flag->getKey());
     }
 }
