@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": ">=7.3",
-        "aws/aws-sdk-php": "^3.86.0",
+        "aws/aws-sdk-php": "^3.86",
         "launchdarkly/server-sdk": ">=4.0.0 <7.0.0"
     },
     "require-dev": {
