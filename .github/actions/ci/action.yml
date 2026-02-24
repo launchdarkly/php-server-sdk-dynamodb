@@ -1,16 +1,16 @@
 name: CI Workflow
-description: 'Shared CI workflow.'
+description: "Shared CI workflow."
 inputs:
   php-version:
-    description: 'Which version of PHP should we setup?'
+    description: "Which version of PHP should we setup?"
     required: false
     default: 7.4
   shared-test-version:
-    description: 'Which version of the shared test package should we required'
+    description: "Which version of the shared test package should we required"
     required: false
     default: 4.x-dev
   token:
-    description: 'Token used to prevent composer rate limiting'
+    description: "Token used to prevent composer rate limiting"
     required: true
 
 runs:
@@ -26,7 +26,7 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: composer install --no-progress
+      run: composer install --no-progress --no-security-blocking
 
     - name: Require appropriate shared tests package
       shell: bash
