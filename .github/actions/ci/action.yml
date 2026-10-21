@@ -4,11 +4,11 @@ inputs:
   php-version:
     description: "Which version of PHP should we setup?"
     required: false
-    default: 7.4
+    default: 8.2
   shared-test-version:
     description: "Which version of the shared test package should we required"
     required: false
-    default: 4.x-dev
+    default: dev-main
   token:
     description: "Token used to prevent composer rate limiting"
     required: true
