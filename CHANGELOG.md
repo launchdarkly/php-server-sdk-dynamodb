@@ -2,6 +2,13 @@
 
 All notable changes to the project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org).
 
+## [1.4.0](https://github.com/launchdarkly/php-server-sdk-dynamodb/compare/1.3.0...1.4.0) (2026-10-21)
+
+
+### Features
+
+* Require PHP 8.2 or later ([#32](https://github.com/launchdarkly/php-server-sdk-dynamodb/issues/32)) ([6943026](https://github.com/launchdarkly/php-server-sdk-dynamodb/commit/694302636008b5e736b5cfee663ccf4bf7deb760))
+
 ## [1.3.0](https://github.com/launchdarkly/php-server-sdk-dynamodb/compare/1.2.0...1.3.0) (2024-07-31)
 
 
