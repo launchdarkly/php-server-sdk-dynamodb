@@ -28,8 +28,6 @@ jobs:
             shared-test-version: dev-main
           - php-version: 8.4
             shared-test-version: dev-main
-          - php-version: 8.5
-            shared-test-version: dev-main
 
 
     steps:
