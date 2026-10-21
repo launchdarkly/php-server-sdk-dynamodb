@@ -22,13 +22,13 @@ jobs:
     strategy:
       matrix:
         include:
-          - php-version: 8.1
-            shared-test-version: dev-main
           - php-version: 8.2
             shared-test-version: dev-main
           - php-version: 8.3
             shared-test-version: dev-main
           - php-version: 8.4
+            shared-test-version: dev-main
+          - php-version: 8.5
             shared-test-version: dev-main
 
 

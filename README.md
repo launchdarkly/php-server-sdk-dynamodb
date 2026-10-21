@@ -8,7 +8,7 @@ This library provides a DynamoDB-backed data source for the [LaunchDarkly PHP SD
 
 The minimum version of the LaunchDarkly PHP SDK for use with this library is 4.0.0. In earlier versions of the SDK, the DynamoDB integration was bundled in the main SDK package.
 
-The minimum PHP version is 8.1.
+The minimum PHP version is 8.2.
 
 For more information, see [our SDK documentation](https://docs.launchdarkly.com/sdk/features/storing-data).
 
